@@ -17,16 +17,16 @@ RF_model = RandomForestRegressor(
 )
 
 
-df = pd.read_csv("House_Price_Prediction/dataset/House Price Prediction Dataset.csv")
-df = df.drop("Id", axis=1)
-df = pd.get_dummies(
-   df,
-   columns=["Location", "Condition", "Parking"],
-   drop_first=True
-)
+df = pd.read_csv("House_Price_Prediction/dataset/house_prices_dataset.csv")
+#df = df.drop("Id", axis=1)
+#df = pd.get_dummies(
+#   df,
+#   columns=["Location", "Condition", "Parking"],
+#   drop_first=True
+#)
 
-X = df.drop(["Floors","Price"], axis=1)
-Y = df["Price"]
+X = df.drop('price', axis=1)
+Y = df["price"]
 X_train, X_test, Y_train, Y_test = train_test_split(
     X, Y, test_size=0.2, random_state=42
 )
@@ -56,23 +56,23 @@ rmse_RF = np.sqrt(mean_squared_error(Y_test, Y_pred_RF))
 print("RF MAE:", mae_RF)
 print("RF RMSE:", rmse_RF)
 
-plt.scatter(Y_test, Y_pred_LR, alpha=0.6)
-min_price_LR = min(Y_test.min(), Y_pred_LR.min())
-max_price_LR = max(Y_test.max(), Y_pred_LR.max())
-plt.plot([min_price_LR, max_price_LR], [min_price_LR, max_price_LR])
-plt.xlabel("Actual Price")
-plt.ylabel("Predicted Price")
-plt.title("Actual vs Predicted Prices (Linear Regression)")
+#plt.scatter(Y_test, Y_pred_LR, alpha=0.6)
+#min_price_LR = min(Y_test.min(), Y_pred_LR.min())
+#max_price_LR = max(Y_test.max(), Y_pred_LR.max())
+#plt.plot([min_price_LR, max_price_LR], [min_price_LR, max_price_LR])
+#plt.xlabel("Actual Price")
+#plt.ylabel("Predicted Price")
+#plt.title("Actual vs Predicted Prices (Linear Regression)")
 #plt.savefig("House_Price_Prediction/images/LR_Graph.png")
 
 
-plt.scatter(Y_test, Y_pred_DT, alpha=0.6)
-min_price_DT = min(Y_test.min(), Y_pred_DT.min())
-max_price_DT = max(Y_test.max(), Y_pred_DT.max())
-plt.plot([min_price_DT, max_price_DT], [min_price_DT, max_price_DT])
-plt.xlabel("Actual Price")
-plt.ylabel("Predicted Price")
-plt.title("Actual vs Predicted Prices (Decision Tree)")
+#plt.scatter(Y_test, Y_pred_DT, alpha=0.6)
+#min_price_DT = min(Y_test.min(), Y_pred_DT.min())
+#max_price_DT = max(Y_test.max(), Y_pred_DT.max())
+#plt.plot([min_price_DT, max_price_DT], [min_price_DT, max_price_DT])
+#plt.xlabel("Actual Price")
+#plt.ylabel("Predicted Price")
+#plt.title("Actual vs Predicted Prices (Decision Tree)")
 #plt.savefig("House_Price_Prediction/images/DT_Graph.png")
 
 plt.scatter(Y_test , Y_pred_RF , alpha=0.6)
@@ -82,4 +82,4 @@ plt.plot([min_price_RF, max_price_RF], [min_price_RF, max_price_RF])
 plt.xlabel("Actual Price")
 plt.ylabel("Predicted Price")
 plt.title("Actual vs Predicted Prices (Random Forest)")
-#plt.savefig("House_Price_Prediction/images/RF_Graph.png")
+plt.savefig("House_Price_Prediction/images/RF_Graph.png")
